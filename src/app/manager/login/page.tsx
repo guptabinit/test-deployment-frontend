@@ -87,6 +87,7 @@ export default function LoginPage() {
         // toast.success("Login Successful", {
         //   description: "Redirecting to dashboard...",
         // });
+        localStorage.setItem("key",data.token)
         router.push("/manager/dashboard");
       }
     } catch (err) {
