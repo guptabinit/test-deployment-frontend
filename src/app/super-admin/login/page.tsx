@@ -83,6 +83,7 @@ const SuperAdminLoginPage = () => {
         }
       } else {
         // Login successful
+        localStorage.setItem("sKey",data.token)
         toast.success("Login Successful", {
           description: "Redirecting to dashboard...",
         });

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import type React from "react"
 import { useEffect, useState } from "react"
 import { useBranchStore } from "@/stores/owner/branchStore" 
+import { useRouter } from "next/navigation";
 
 export default function OwnerLayout({
   children,
@@ -14,6 +15,7 @@ export default function OwnerLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const { fetchBranches, isLoadingBranches } = useBranchStore()
+   const router = useRouter();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -22,6 +24,13 @@ export default function OwnerLayout({
   useEffect(() => {
     fetchBranches()
   }, [fetchBranches])
+
+    useEffect(()=>{
+      if(!localStorage.getItem("oKey")){
+        router.push("/owner/login");
+      }
+    },[])
+  
 
   return (
     <div className="flex min-h-screen bg-gray-50">

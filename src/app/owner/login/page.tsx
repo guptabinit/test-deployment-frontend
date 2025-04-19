@@ -84,6 +84,7 @@ export default function LoginPage() {
         }
       } else {
         // Login successful
+        localStorage.setItem("oKey",data.token)
         toast.success("Login Successful", {
           description: "Redirecting to dashboard...",
         });

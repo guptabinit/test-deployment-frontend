@@ -3,10 +3,7 @@ export async function fetchWithAuth(
   options: RequestInit = {}
 ): Promise<Response> {
   // Extract the token from `document.cookie`
-  const token = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("token="))
-    ?.split("=")[1];
+  const token = localStorage.getItem("oKey")
 
   if (!token) {
     throw new Error("No authentication token found.");

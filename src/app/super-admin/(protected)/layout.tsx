@@ -5,6 +5,7 @@ import { SuperAdminSidebar } from "../../../components/sidebar/SuperAdminSidebar
 import { useSuperAdminStore } from "@/stores/superAdmin/superAdminStore";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function SuperAdminLayout({
   children,
@@ -19,11 +20,21 @@ export default function SuperAdminLayout({
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const router = useRouter();
+
   useEffect(() => {
     if (!adminInfo) {
       fetchAdminInfo();
     }
   }, [adminInfo, fetchAdminInfo]);
+
+  
+      useEffect(()=>{
+        if(!localStorage.getItem("sKey")){
+          router.push("/super-admin/login");
+        }
+      },[])
+    
 
   return (
     <div>

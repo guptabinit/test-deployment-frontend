@@ -2,8 +2,9 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Sidebar } from "../../../components/sidebar/Sidebar"
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils"
 import useManagerStore from '@/stores/manager/managerDetailsStore'
 
@@ -19,12 +20,19 @@ export default function ManagerLayout({
     setIsSidebarOpen(!isSidebarOpen)
   }
 
+  const router = useRouter();
   const { manager, hotel, isHotelLoading, fetchManagerDetails } = useManagerStore()
 
   // Fetch manager details if not already fetched
   if (!manager || !hotel) {
     fetchManagerDetails()
   }
+
+  useEffect(()=>{
+    if(!localStorage.getItem("key")){
+      router.push("/manager/login");
+    }
+  },[])
 
   return (
     <div className="flex h-screen bg-gray-50">
