@@ -44,6 +44,7 @@ export default function LogoutPage() {
           setStatus("success");
 
           // Redirect after a short delay to show the success message
+          localStorage.clear()
           setTimeout(() => {
             router.push("/manager/login");
           }, 1500);
